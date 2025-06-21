@@ -121,3 +121,17 @@ kustomize build apps/spark/spark-operator/overlays/kubeflow | kubectl apply -f -
 # User
 
 kustomize build common/user-namespace/base | kubectl apply -f -
+
+# Model registrey
+
+git clone --depth 1 -b v0.2.19 https://github.com/kubeflow/model-registry.git
+cd model-registry/manifests/kustomize
+
+PROFILE_NAME=kubeflow-user-example-com
+for DIR in options/istio overlays/db ; do (cd $DIR; kustomize edit set namespace $PROFILE_NAME); done
+
+kubectl apply -k overlays/db
+kubectl apply -k options/istio
+kubectl apply -k options/ui/overlays/istio
+
+kubectl port-forward svc/model-registry-service -n $PROFILE_NAME 8081:8080
