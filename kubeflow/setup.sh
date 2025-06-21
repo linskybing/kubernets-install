@@ -134,4 +134,9 @@ kubectl apply -k overlays/db
 kubectl apply -k options/istio
 kubectl apply -k options/ui/overlays/istio
 
-kubectl port-forward svc/model-registry-service -n $PROFILE_NAME 8081:8080
+# kubectl port-forward svc/model-registry-service -n $PROFILE_NAME 8081:8080
+
+kubectl port-forward svc/istio-ingressgateway -n istio-system 8080:80
+
+#kubectl apply -f https://raw.githubusercontent.com/GoogleCloudPlatform/spark-on-k8s-operator/v2.2.0/manifest/crds/spark-operator-crds.yaml
+

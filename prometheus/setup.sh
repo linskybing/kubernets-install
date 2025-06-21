@@ -9,7 +9,7 @@ kubectl create namespace monitoring
 helm show values prometheus-community/kube-prometheus-stack > prometheus/value.yaml
 
 helm install -f prometheus/value.yaml prometheus prometheus-community/kube-prometheus-stack -n prometheus-stack --create-namespace
-
+#helm upgrade -f prometheus/value.yaml prometheus prometheus-community/kube-prometheus-stack -n prometheus-stack
 # kube-prometheus-stack has been installed. Check its status by running:
 #   kubectl --namespace prometheus-stack get pods -l "release=prometheus"
 
@@ -19,8 +19,8 @@ helm install -f prometheus/value.yaml prometheus prometheus-community/kube-prome
 
 # Access Grafana local instance:
 
-#   export POD_NAME=$(kubectl --namespace prometheus-stack get pod -l "app.kubernetes.io/name=grafana,app.kubernetes.io/instance=prometheus" -oname)
-#   kubectl --namespace prometheus-stack port-forward $POD_NAME 3000
+  export POD_NAME=$(kubectl --namespace prometheus-stack get pod -l "app.kubernetes.io/name=grafana,app.kubernetes.io/instance=prometheus" -oname)
+  kubectl --namespace prometheus-stack port-forward $POD_NAME 3000
 
 # Visit https://github.com/prometheus-operator/kube-prometheus for instructions on how to create & configure Alertmanager and Prometheus instances using the Operator.
 
@@ -32,8 +32,8 @@ helm repo add gpu-helm-charts \
 helm repo update
 
 helm install \
-   -n dcgm-exporter --create-namespace \
-   dcgm-exporter gpu-helm-charts/dcgm-exporter
+   -n prometheus-stack --create-namespace \
+   prometheus-stack gpu-helm-charts/dcgm-exporter
 
 
 # 1. Get the application URL by running these commands:
