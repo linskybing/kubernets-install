@@ -1,0 +1,8 @@
+USER-SUPPLIED VALUES:
+controller:
+  config:
+    enable-snippet: true
+  extraArgs:
+    enable-ssl-passthrough: true
+  publishService:
+    enabled: true

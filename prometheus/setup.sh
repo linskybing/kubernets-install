@@ -40,3 +40,5 @@ helm install \
 #   export POD_NAME=$(kubectl get pods -n dcgm-exporter -l "app.kubernetes.io/name=dcgm-exporter,app.kubernetes.io/instance=dcgm-exporter" -o jsonpath="{.items[0].metadata.name}")
 #   kubectl -n dcgm-exporter port-forward $POD_NAME 8080:9400 &
 #   echo "Visit http://127.0.0.1:8080/metrics to use your application"
+
+
